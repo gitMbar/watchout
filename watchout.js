@@ -29,7 +29,10 @@
       var enemyX = d3.select(this).attr("cx");
       var enemyY = d3.select(this).attr("cy");
       if (Math.sqrt(Math.pow(heroX - enemyX,2) + Math.pow(heroY - enemyY,2)) < 35){
-        console.log("OW");
+       d3.select('.current').select('span').text("0");
+       var collisions = d3.select('.collisions').select('span').text();
+       collisions++;
+       d3.select('.collisions').select('span').text(collisions);
       }
     });
   };
@@ -75,12 +78,12 @@
   };
 
   makeHero();
-  setInterval(collide, 50)
-// encapsulate player create into a function
-  // give player some kind of 'on() do()' function
-
-// collision detection
-
+  setInterval(collide, 50);
 // keep track of user score
-
+  setInterval(function(){
+    var score = parseInt(d3.select('.current').select('span').text());
+    score ++;
+    d3.select('.current').select('span').text(score);
+  }, 50);
+// d3.select('collisions').select('span').text()
 })();
