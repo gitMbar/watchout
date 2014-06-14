@@ -35,10 +35,17 @@
   };
 
   setInterval(moveEnemies, 1000);
-// encapsulate update enemies location into a function
-  // takes random values as parameters
-  //  use transition and maybe duration functions to move
 
+  var makeHero = function(){
+    d3.select("svg").selectAll("insertHere").data([{x: 350, y:225}])
+      .enter().append("circle")
+      .attr("cx", function(d){ return d.x;})
+      .attr("cy", function(d){ return d.y;})
+      .attr("r", 10).attr("fill", "blue")
+      .attr("class", "hero");
+  };
+
+  makeHero();
 // encapsulate player create into a function
   // give player some kind of 'on() do()' function
 
