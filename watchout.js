@@ -2,8 +2,7 @@
 
   var svg = d3.select("body").append("svg")
     .attr("width", 700)
-    .attr("height", 450)
-    .append("g");
+    .attr("height", 450);
 
 
 
@@ -15,9 +14,10 @@
     for(var i = 0; i < numEnemies; i++) {
       positions.push({x: Math.random() * 700, y: Math.random() * 450});
     }
-    d3.selectAll("g").data(positions).enter().append("g")
-      .attr("x", function(d){ return d.x;})
-      .attr("y", function(d) { return d.y;})
+    d3.select("svg").selectAll("circle").data(positions).enter().append("circle")
+      .attr("cx", function(d){ return d.x;})
+      .attr("cy", function(d) { return d.y;})
+      .attr("r", 10)
       .attr("class", "enemy");
   };
 drawEnemies(5);
