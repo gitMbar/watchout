@@ -20,7 +20,19 @@
     .attr("height", 450)
     .on("click", click)
 
+//d3.selectAll(.enemy).each(function(){})??
 
+  var collide = function(){
+    d3.selectAll(".enemy").attr("cx", function(d){
+      var heroX = d3.select(".hero").attr("cx");
+      var heroY = d3.select(".hero").attr("cy");
+      var enemyX = d3.select(this).attr("cx");
+      var enemyY = d3.select(this).attr("cy");
+      if (Math.sqrt(Math.pow(heroX - enemyX,2) + Math.pow(heroY - enemyY,2)) < 35){
+        console.log("OW");
+      }
+    });
+  };
 
 // encapsulate draw enemies into a function
   //takes random start positions as first data
@@ -63,6 +75,7 @@
   };
 
   makeHero();
+  setInterval(collide, 50)
 // encapsulate player create into a function
   // give player some kind of 'on() do()' function
 
