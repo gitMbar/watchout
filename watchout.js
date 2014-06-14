@@ -1,8 +1,24 @@
 (function watchout(){
   var numEnemies = 5;
+
+  function click(){
+    if (d3.event.defaultPrevented) return;
+    var point = d3.mouse(this);
+    var p = {x: point[0], y: point[1]};
+  }
+
+  var dragmove = function(d){
+    var x = d3.event.x;
+    var y = d3.event.y;
+    d3.select(this).attr("cx", x);
+    d3.select(this).attr("cy", y);
+  };
+  var drag = d3.behavior.drag().on("drag", dragmove);
+
   var svg = d3.select("body").append("svg")
     .attr("width", 700)
-    .attr("height", 450);
+    .attr("height", 450)
+    .on("click", click)
 
 
 
@@ -29,7 +45,7 @@
     }
     d3.selectAll(".enemy").data(newPositions)
       .transition()
-      .duration(200)
+      .duration(1000)
       .attr("cx", function(d){ return d.x;})
       .attr("cy", function(d) { return d.y;})
   };
@@ -42,7 +58,8 @@
       .attr("cx", function(d){ return d.x;})
       .attr("cy", function(d){ return d.y;})
       .attr("r", 10).attr("fill", "blue")
-      .attr("class", "hero");
+      .attr("class", "hero")
+      .call(drag);
   };
 
   makeHero();
